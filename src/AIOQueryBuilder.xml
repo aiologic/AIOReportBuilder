@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="aio logic.aioquerybuilder.AIOQueryBuilder" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>AIOQuery Builder</name>
+    <description>This is the query builder for reports</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="whereClause" type="attribute">
+                <caption>Attribute (path)</caption>
+                <description/>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Data source">
+            <propertyGroup caption="Options">
+                <property key="selectedColumns" type="datasource" isList="true" >
+                    <caption>Data source</caption>
+                    <description>Please use a microflow to retrieve. Get all the objects you want to suggest as options. The same object type as for the default value must be selected.</description>
+                </property> 
+                <property key="objIdName" type="attribute" required="false" dataSource="selectedColumns">
+                    <caption>Object id options</caption>
+                    <description>Id attribute of the object.</description>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+                <property key="objIdType" type="attribute" required="false" dataSource="selectedColumns">
+                    <caption>Object Type</caption>
+                    <description>Type attribute of the object.</description>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>          
+        </propertyGroup>
+        <propertyGroup caption="Styling">
+            <property key="useDefaultStyle" type="boolean" defaultValue="true">
+                <caption>useDefaultStyle</caption>
+                <description>Do you want to use the default styling?</description>
+            </property>
+            <property key="placeholder" type="string" required="false">
+                <caption>Placeholder</caption>
+                <description>Placeholder text for when there are no labels.</description>
+            </property>
+                <property key="className" type="string" required="false" defaultValue="CustomDropdown">
+                <caption>ClassName</caption>
+                <description>Custom class name.</description>
+            </property>
+                <property key="classNamePrefix" type="string" required="false" defaultValue="PrefixCustomDropdown">
+                <caption>ClassNamePrefix</caption>
+                <description>Custom Class name prefix.</description>
+            </property>
+        </propertyGroup> 
+    </properties>
+</widget>
