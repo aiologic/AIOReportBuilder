@@ -24,6 +24,11 @@ export default class QueryBuilder extends Component {
                     reportBuilderColumns: options
                 })
             })
+            setTimeout(() => {
+                if (this._queryBuilderRef && this.props.whereClause.value !== "") {
+                    this._queryBuilderRef.setRulesFromSql(this.props.whereClause.value)
+                }
+            }, 500)
         }
     }
 
@@ -44,16 +49,16 @@ export default class QueryBuilder extends Component {
         const name = this.getAttributeValue(this.props.objIdName, obj);
         const type = this.getAttributeValue(this.props.objIdType, obj);
         let convertedType = type.toLowerCase();
-        if(convertedType === "integer" || convertedType === "decimal" || convertedType === "autonumber" || convertedType === "long" || convertedType === "float" || convertedType === "currency") {
+        if (convertedType === "integer" || convertedType === "decimal" || convertedType === "autonumber" || convertedType === "long" || convertedType === "float" || convertedType === "currency") {
             convertedType = "number"
         }
-        if(convertedType === "datetime") {
+        if (convertedType === "datetime") {
             convertedType = "date"
         }
-        if(convertedType === "enum" || convertedType === "hash") {
+        if (convertedType === "enum" || convertedType === "hash") {
             convertedType = "string"
         }
-        if(convertedType === "binary") {
+        if (convertedType === "binary") {
             convertedType = "boolean"
         }
         return { field: name, label: name, type: convertedType };
