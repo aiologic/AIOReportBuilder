@@ -46,8 +46,9 @@ export default class QueryBuilder extends Component {
     }
 
     getReportBuilderOption = (obj) => {
-        const name = this.getAttributeValue(this.props.objIdName, obj);
-        const type = this.getAttributeValue(this.props.objIdType, obj);
+        const label = this.getAttributeValue(this.props.displayAttribute, obj);
+        const name = this.getAttributeValue(this.props.valueAttribute, obj);
+        const type = this.getAttributeValue(this.props.valueTypeAttribute, obj);
         let convertedType = type.toLowerCase();
         if (convertedType === "integer" || convertedType === "decimal" || convertedType === "autonumber" || convertedType === "long" || convertedType === "float" || convertedType === "currency") {
             convertedType = "number"
@@ -61,7 +62,7 @@ export default class QueryBuilder extends Component {
         if (convertedType === "binary") {
             convertedType = "boolean"
         }
-        return { field: name, label: name, type: convertedType };
+        return { field: name, label: label, type: convertedType };
     };
 
     getAttributeValue = (attribute, obj) =>
