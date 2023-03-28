@@ -15,6 +15,13 @@
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
+            <property key="whereClausePostgres" type="attribute">
+                <caption>Where Clause Postgres (path)</caption>
+                <description/>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
         </propertyGroup>
         <propertyGroup caption="Data source">
             <propertyGroup caption="Options">
