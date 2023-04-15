@@ -63,7 +63,7 @@ export default class QueryBuilder extends Component {
         if (convertedType === "binary") {
             convertedType = "boolean"
         }
-        return { field: name, label: label, type: convertedType };
+        return { field: name, label: label, type: convertedType, format: convertedType === "date" ? "MM/dd/yyyy" : undefined };
     };
 
     getAttributeValue = (attribute, obj) =>
@@ -87,26 +87,28 @@ export default class QueryBuilder extends Component {
     getPostgresFormattedQuery = (query) => {
         let newQuery = query;
         while (newQuery.includes("LIKE (") || newQuery.includes("IN '") || newQuery.includes("IS EMPTY") || newQuery.includes("NOT IS EMPTY")) {
-            if (newQuery.includes("LIKE (")) {
-                const parts = newQuery.split("LIKE ('")
-                for (let i = 1; i < parts.length; i++) {
-                    parts[i] = parts[i].replace("')", "'")
-                }
-                newQuery = parts.join("LIKE '");
-            } else if (newQuery.includes("IN '")) {
-                const parts = newQuery.split("IN '")
-                for (let i = 1; i < parts.length; i++) {
-                    parts[i] = parts[i].replace("'", "')")
-                }
-                newQuery = parts.join("IN ('");
-            } else if (newQuery.includes("NOT IS EMPTY")) {
-                newQuery = newQuery.split("NOT IS EMPTY").join("!= ''")
-            } else if (newQuery.includes("IS EMPTY")) {
-                newQuery = newQuery.split("IS EMPTY").join("= ''")
+          if (newQuery.includes("LIKE (")) {
+            const parts = newQuery.split("LIKE ('")
+            for (let i = 1; i < parts.length; i++) {
+              parts[i] = parts[i].replace("')", "'")
             }
+            newQuery = parts.join("LIKE '");
+          } else if (newQuery.includes("IN '")) {
+            const parts = newQuery.split("IN '")
+            for (let i = 1; i < parts.length; i++) {
+              parts[i] = parts[i].replace("'", "')")
+            }
+            newQuery = parts.join("IN ('");
+          } else if (newQuery.includes("NOT IS EMPTY")) {
+            newQuery = newQuery.split("NOT IS EMPTY").join("!= ''")
+          } else if (newQuery.includes("IS EMPTY")) {
+            newQuery = newQuery.split("IS EMPTY").join("= ''")
+          }
         }
+        newQuery = newQuery.replace(/(\d\d)\/(\d\d)\/(\d{4})/g, "$3-$1-$2")
         return newQuery
-    }
+      }
+      
 
     waitUntilReportBuilder = condition => {
         return new Promise(resolve => {

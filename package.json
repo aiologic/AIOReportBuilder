@@ -10,7 +10,7 @@
   },
   "license": "Apache-2.0",
   "config": {
-    "projectPath": "Y:\\AIOPivotTable",
+    "projectPath": "Y:\\AIO Axis-AIOAxis-Analytics-41323",
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
@@ -38,6 +38,7 @@
     "@types/react-test-renderer": "~16.9.0"
   },
   "dependencies": {
+    "@syncfusion/ej2-react-calendars": "^21.1.38",
     "@syncfusion/ej2-react-querybuilder": "^20.4.51",
     "classnames": "^2.2.6",
     "mendix": "^9.23.621"
